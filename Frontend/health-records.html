@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Health Records | ElderCare Companion</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div id="site-header"></div>
+<main><section class="page-banner"><div class="container"><span class="eyebrow">HEALTH RECORDS</span><h1>Health information</h1><p>Store basic health measurements and notes for easy reference.</p></div></section>
+<section class="section"><div class="container two-col module-layout">
+<form class="form-card" id="recordForm"><h2>Add health record</h2><label>Date<input id="recordDate" type="date" required></label><label>Blood pressure<input id="recordBP" placeholder="e.g. 120/80"></label><label>Blood sugar<input id="recordSugar" placeholder="e.g. 95 mg/dL"></label><label>Weight<input id="recordWeight" placeholder="e.g. 65 kg"></label><label>Notes<textarea id="recordNotes" rows="4" placeholder="Additional information"></textarea></label><button class="btn btn-primary" type="submit">Save Record</button></form>
+<div><div class="module-top"><h2>Records</h2><span id="recordEmpty" class="muted">No records added yet.</span></div><div id="recordList" class="item-list"></div></div>
+</div></section></main><div id="site-footer"></div><script src="js/app.js"></script></body></html>

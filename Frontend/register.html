@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | ElderCare Companion</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div id="site-header"></div>
+
+<main class="auth-page">
+    <div class="auth-card wide">
+
+        <div class="brand-mark">❤</div>
+
+        <h1>Create your account</h1>
+        <p>Start organizing care in one place.</p>
+
+        <form id="registerForm" class="form-grid">
+
+            <label>
+                Full Name
+                <input id="regName" type="text" required>
+            </label>
+
+            <label>
+                Email
+                <input id="regEmail" type="email" required>
+            </label>
+
+            <label>
+                Phone
+                <input id="regPhone" type="tel" required>
+            </label>
+
+            <label>
+                Role
+                <select id="regRole">
+                    <option value="ELDER">Senior Citizen</option>
+                    <option value="CAREGIVER">Family/Caregiver</option>
+                </select>
+            </label>
+
+            <label>
+                Password
+                <input id="regPassword" type="password" minlength="6" required>
+            </label>
+
+            <label>
+                Confirm Password
+                <input id="regConfirm" type="password" minlength="6" required>
+            </label>
+
+            <div class="full-row">
+                <button class="btn btn-primary full" type="submit">
+                    Create Account
+                </button>
+            </div>
+
+        </form>
+
+        <div id="registerStatus" class="form-status"></div>
+
+        <p class="auth-switch">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+    </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/app.js"></script>
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("regName").value.trim();
+    const email = document.getElementById("regEmail").value.trim();
+    const password = document.getElementById("regPassword").value;
+    const confirmPassword = document.getElementById("regConfirm").value;
+
+    const status = document.getElementById("registerStatus");
+
+    // Check passwords
+    if (password !== confirmPassword) {
+        status.textContent = "Passwords do not match.";
+        status.style.color = "red";
+        return;
+    }
+
+    status.textContent = "Creating your account...";
+    status.style.color = "";
+
+    try {
+
+        const response = await fetch("http://localhost:8080/api/auth/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password,
+                phone: document.getElementById("regPhone").value.trim(),
+                 role: document.getElementById("regRole").value
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Registration failed");
+        }
+
+        status.textContent = "Account created successfully! Redirecting to login...";
+        status.style.color = "green";
+
+        // Redirect after successful registration
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1500);
+
+    } catch (error) {
+
+        console.error("Registration error:", error);
+
+        status.textContent =
+            error.message || "Unable to connect to the server.";
+
+        status.style.color = "red";
+    }
+});
+</script>
+
+</body>
+</html>

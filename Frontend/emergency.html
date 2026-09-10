@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Emergency SOS | ElderCare Companion</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div id="site-header"></div>
+<main><section class="emergency-hero"><div class="container emergency-content"><div class="sos-symbol">SOS</div><span class="eyebrow">EMERGENCY SUPPORT</span><h1>Get help quickly</h1><p>Keep trusted contacts ready. This student project simulates an SOS workflow; it does not replace local emergency services.</p><button id="sosButton" class="sos-button">🚨 ACTIVATE SOS</button><div id="sosStatus" class="sos-status"></div></div></section>
+<section class="section"><div class="container two-col">
+<form class="form-card" id="contactFormEmergency"><h2>Add emergency contact</h2><label>Name<input id="ecName" required></label><label>Relationship<input id="ecRelation" required></label><label>Phone<input id="ecPhone" type="tel" required></label><button class="btn btn-primary" type="submit">Add Contact</button></form>
+<div><div class="module-top"><h2>Emergency contacts</h2><span id="contactEmpty" class="muted">No contacts added yet.</span></div><div id="contactList" class="item-list"></div></div>
+</div></section></main><div id="site-footer"></div><script src="js/app.js"></script></body></html>

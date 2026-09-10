@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Appointments | ElderCare Companion</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div id="site-header"></div>
+<main><section class="page-banner"><div class="container"><span class="eyebrow">APPOINTMENTS</span><h1>Doctor appointments</h1><p>Keep upcoming visits easy to remember.</p></div></section>
+<section class="section"><div class="container two-col module-layout">
+<form class="form-card" id="appointmentForm"><h2>Add appointment</h2><label>Doctor name<input id="appDoctor" required></label><label>Date<input id="appDate" type="date" required></label><label>Time<input id="appTime" type="time" required></label><label>Purpose<input id="appPurpose" placeholder="e.g. General checkup" required></label><button class="btn btn-primary" type="submit">Add Appointment</button></form>
+<div><div class="module-top"><h2>My appointments</h2><span id="appointmentEmpty" class="muted">No appointments added yet.</span></div><div id="appointmentList" class="item-list"></div></div>
+</div></section></main><div id="site-footer"></div><script src="js/app.js"></script></body></html>

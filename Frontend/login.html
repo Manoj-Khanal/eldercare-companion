@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | ElderCare Companion</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div id="site-header"></div>
+
+<main class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="brand-mark">❤</div>
+
+        <h1>Welcome back</h1>
+
+        <p>Sign in to your ElderCare Companion account.</p>
+
+        <form id="loginForm">
+
+            <label>
+                Email
+                <input
+                    id="loginEmail"
+                    type="email"
+                    required
+                >
+            </label>
+
+            <label>
+                Password
+                <input
+                    id="loginPassword"
+                    type="password"
+                    minlength="6"
+                    required
+                >
+            </label>
+
+            <button class="btn btn-primary full" type="submit">
+                Login
+            </button>
+
+            <div id="loginStatus" class="form-status"></div>
+
+        </form>
+
+        <p class="auth-switch">
+            Don't have an account?
+            <a href="register.html">Register</a>
+        </p>
+
+    </div>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/app.js"></script>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+
+    const status = document.getElementById("loginStatus");
+
+    status.textContent = "Logging in...";
+    status.style.color = "";
+
+    try {
+
+        const response = await fetch("http://localhost:8080/api/auth/login", {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Login failed");
+        }
+
+        console.log("Login response:", data);
+
+        /*
+         * Store only safe user information.
+         * The backend does NOT send the password.
+         */
+        localStorage.setItem("userId", data.id);
+        localStorage.setItem("userName", data.name);
+        localStorage.setItem("userEmail", data.email);
+
+        status.textContent = "Login successful! Redirecting...";
+        status.style.color = "green";
+
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 1000);
+
+    } catch (error) {
+
+        console.error("Login error:", error);
+
+        status.textContent =
+            error.message || "Unable to connect to the server.";
+
+        status.style.color = "red";
+    }
+
+});
+</script>
+
+</body>
+</html>
